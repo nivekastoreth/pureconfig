@@ -1,3 +1,3 @@
 name := "pureconfig"
 
-crossScalaVersions ~= { _ :+ "2.13.0" }
+crossScalaVersions ~= { "2.13.0" +: _ }

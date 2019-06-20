@@ -1,6 +1,6 @@
 name := "pureconfig-akka"
 
-crossScalaVersions ~= { _ :+ "2.13.0" }
+crossScalaVersions ~= { "2.13.0" +: _ }
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.23")

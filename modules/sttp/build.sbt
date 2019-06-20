@@ -1,6 +1,6 @@
 name := "pureconfig-sttp"
 
-crossScalaVersions ~= { _ :+ "2.13.0" }
+crossScalaVersions ~= { "2.13.0" +: _ }
 
 libraryDependencies ++= Seq(
   "com.softwaremill.sttp" %% "core" % "1.6.0")
