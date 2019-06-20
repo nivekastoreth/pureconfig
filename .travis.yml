@@ -33,7 +33,7 @@ after_success:
 jobs:
   include:
     - env: JOB=microsite
-      scala: 2.12.8
+      scala: 2.13.0
       addons:
         apt:
           packages:
