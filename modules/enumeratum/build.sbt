@@ -1,5 +1,7 @@
 name := "pureconfig-enumeratum"
 
+crossScalaVersions ~= { _ :+ "2.13.0" }
+
 libraryDependencies ++= Seq(
   "com.beachape" %% "enumeratum" % "1.5.13")
 

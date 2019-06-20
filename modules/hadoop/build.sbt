@@ -1,5 +1,7 @@
 name := "pureconfig-hadoop"
 
+crossScalaVersions ~= { _ :+ "2.13.0" }
+
 libraryDependencies ++= Seq(
   "org.apache.hadoop" % "hadoop-common" % "3.2.0" % "provided,Tut")
 
