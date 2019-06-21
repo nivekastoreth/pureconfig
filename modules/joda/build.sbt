@@ -1,7 +1,5 @@
 name := "pureconfig-joda"
 
-crossScalaVersions ~= { "2.13.0" +: _ }
-
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.10.2",
   "org.joda" % "joda-convert" % "2.2.1")

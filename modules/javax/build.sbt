@@ -1,7 +1,5 @@
 name := "pureconfig-javax"
 
-crossScalaVersions ~= { "2.13.0" +: _ }
-
 developers := List(
   Developer("derekmorr", "Derek Morr", "morr.derek@gmail.com", url("https://github.com/derekmorr")))
 

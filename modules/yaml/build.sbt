@@ -1,7 +1,5 @@
 name := "pureconfig-yaml"
 
-crossScalaVersions ~= { "2.13.0" +: _ }
-
 libraryDependencies ++= Seq(
   "org.yaml" % "snakeyaml" % "1.24")
 

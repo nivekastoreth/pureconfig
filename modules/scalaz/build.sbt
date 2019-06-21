@@ -1,5 +1,7 @@
 name := "pureconfig-scalaz"
 
+crossScalaVersions ~= { _.filterNot(_.startsWith("2.13")) }
+
 libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-core" % "7.2.27",
   "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.27-scalacheck-1.13" % "test"

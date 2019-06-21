@@ -1,5 +1,7 @@
 name := "pureconfig-enum"
 
+crossScalaVersions ~= { _.filterNot(_.startsWith("2.13")) }
+
 libraryDependencies ++= Seq(
   "org.julienrf" %% "enum" % "3.1")
 
