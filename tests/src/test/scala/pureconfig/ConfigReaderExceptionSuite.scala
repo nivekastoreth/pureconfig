@@ -200,31 +200,41 @@ class ConfigReaderExceptionSuite extends FlatSpec with Matchers {
   }
 
   it should "have a message displaying the inability to parse a given configuration" in {
-    val workingDir = getClass.getResource("/").getFile
+    val workingDir = getClass.getResource("/").toURI
     val file = "conf/malformed/a.conf"
 
     val exception = intercept[ConfigReaderException[_]] {
-      loadConfigOrThrow[Conf](Paths.get(workingDir, file))
+      loadConfigOrThrow[Conf](Paths.get(workingDir.resolve(file)))
     }
 
     exception.getMessage shouldBe
       s"""|Cannot convert configuration to a pureconfig.ConfigReaderExceptionSuite$$Conf. Failures are:
-          |  - (file:${workingDir}${file}:2) Unable to parse the configuration: Expecting close brace } or a comma, got end of file.
+          |  - (file:${workingDir.toURL.getFile}${file}:2) Unable to parse the configuration: Expecting close brace } or a comma, got end of file.
           |""".stripMargin
   }
 
   it should "have a message indicating that a given file does not exist" in {
-    val workingDir = getClass.getResource("/").getFile
+    val resource = getClass.getResource("/")
     val file = "conf/nonexisting"
+    val workingDir = resource.getFile
+    val path = Paths.get(resource.toURI.resolve(file))
 
     val exception = intercept[ConfigReaderException[_]] {
-      loadConfigOrThrow[Conf](Paths.get(workingDir, file))
+      loadConfigOrThrow[Conf](path)
     }
 
-    exception.getMessage shouldBe
+    // i believe ${workingDir}${file} below can be replaced with $path but have not yet tested that
+    val posixOption =
       s"""|Cannot convert configuration to a pureconfig.ConfigReaderExceptionSuite$$Conf. Failures are:
           |  - Unable to read file ${workingDir}${file} (No such file or directory).
           |""".stripMargin
+
+    val windowsOption =
+      s"""|Cannot convert configuration to a pureconfig.ConfigReaderExceptionSuite$$Conf. Failures are:
+          |  - Unable to read file $path (The system cannot find the file specified).
+          |""".stripMargin
+
+    exception.getMessage should (be(posixOption) or be(windowsOption))
   }
 
   case class HListAndTupleConf(hlist: Int :: Int :: String :: HNil, tuple: (Int, Int, String))

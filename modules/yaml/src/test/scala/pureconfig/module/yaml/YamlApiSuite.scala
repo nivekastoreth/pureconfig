@@ -12,7 +12,7 @@ import pureconfig.module.yaml.error.NonStringKeyFound
 class YamlApiSuite extends BaseSuite {
 
   def resourcePath(path: String): Path =
-    Paths.get(URLDecoder.decode(getClass.getResource("/" + path).getFile, "UTF-8"))
+    Paths.get(getClass.getResource("/").toURI.resolve(path))
 
   def resourceContents(path: String): String =
     new String(Files.readAllBytes(resourcePath(path)))

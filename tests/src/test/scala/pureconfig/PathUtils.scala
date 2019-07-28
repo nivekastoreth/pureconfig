@@ -21,7 +21,7 @@ object PathUtils {
   }
 
   def resourceFromName(name: String): Path = {
-    Paths.get(getClass.getResource(name).getPath)
+    Paths.get(getClass.getResource(name).toURI)
   }
 
   def listResourcesFromNames(names: String*): Seq[Path] = names.map(resourceFromName)

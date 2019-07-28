@@ -41,8 +41,8 @@ final case class ConfigReaderException[T](failures: ConfigReaderFailures)(implic
 
 object ConfigReaderException {
   private[ConfigReaderException] def descriptionWithLocation(failure: ConfigReaderFailure, prefix: String): String = {
-    val failureLines = failure.description.split("\n")
+    val failureLines = failure.description.split("\r?\n")
     (failure.location.fold(s"${prefix}- ${failureLines.head}")(f => s"${prefix}- ${f.description} ${failureLines.head}") ::
-      failureLines.tail.map(l => s"$prefix  $l").toList).mkString("\n")
+      failureLines.tail.map(l => s"$prefix  $l").toList).mkString(System.lineSeparator())
   }
 }
